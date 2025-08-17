@@ -34,3 +34,21 @@ export const getAllRentals = async (req, res) => {
     }
 
 }
+
+export const deleteRentalById =  async (req, res) => {
+
+    const { id } = req.params;
+
+    try {
+        const rent = await Rent.findByIdAndDelete(id);
+
+        if (!rent) {
+            res.status(201).json({ message: 'Rent not found.' });
+        }
+        
+        res.status(200).json({ message: 'Successfully delete rental.' });
+    } catch (error) {
+        console.log('Failed to delete rental.');
+        res.status(500).json({ message: error.message });
+    }
+}
