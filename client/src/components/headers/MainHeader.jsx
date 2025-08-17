@@ -2,8 +2,16 @@ const MainHeader = () => {
 
     return (
         <>
-            <div className="max-w-screen h-[60px] bg-[#7AB2D3]">
-
+            <div className="max-w-screen h-[80px] bg-[#7AB2D3] flex flex-col">
+                <div className="flex items-center justify-between px-2 h-full">
+                    {/* Left Sections */}
+                    <div className="flex items-center gap-2">
+                        <div className="h-[50px] w-[50px] bg-gray-300 rounded-lg"></div>
+                        <h1 className="font-bold text-[20px]">
+                            MyRentals
+                        </h1>
+                    </div>
+                </div>
             </div>
         </>
     );
