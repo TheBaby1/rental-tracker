@@ -52,3 +52,22 @@ export const deleteRentalById =  async (req, res) => {
         res.status(500).json({ message: error.message });
     }
 }
+
+export const updateRentalById = async (req, res) => {
+
+    const { id } = req.params;
+    const updatedRent = req.body;
+
+    try {
+        const rent = await Rent.findByIdAndUpdate(id, updatedRent);
+
+        if (!rent) {
+            res.status(201).json({ message: 'Rent does not exist.' });
+        }
+
+        res.status(200).json({ message: 'Successfully updated rental.' });
+    } catch (error) {
+        console.log('Failed to update rental.' );
+        res.status(500).json({ message: error.message });
+    }
+}
