@@ -5,6 +5,7 @@ export const createRent = async (req, res) => {
 
     try {
         const newRent = new Rent(rent);
+        await newRent.save();
 
         if (!newRent) {
             res.status(201).json({message: 'New rent does not exist.'});
@@ -15,4 +16,21 @@ export const createRent = async (req, res) => {
         console.log('Failed to create new rent');
         res.status(500).json({ error: error.message });
     }
+}
+
+export const getAllRentals = async (req, res) => {
+
+    try {
+        const rentals = await Rent.find();
+
+        if (!rentals) {
+            res.status(201).json({ message: 'There are no rentals.'});
+        }
+
+        res.status(200).json(rentals);
+    } catch (error) {
+        console.log('Could not get rentals.');
+        res.status(500).json({ error: error.message });
+    }
+
 }

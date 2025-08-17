@@ -16,6 +16,6 @@ app.use('/', rentRoutes);
 
 
 app.listen(3001, () => {
-    connectDB;
+    connectDB();
     console.log('Server is running on http://localhost:3001');
 })
