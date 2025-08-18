@@ -5,7 +5,7 @@ const MainHeader = () => {
 
     return (
         <>
-            <div className="max-w-screen h-[80px] bg-[#B9E5E8] flex flex-col">
+            <div className="max-w-screen h-[80px] bg-[#B9E5E8] flex flex-col shadow:md">
                 <div className="flex items-center justify-between px-2 h-full">
                     {/* Left Section */}
                     <div className="flex items-center gap-2">
@@ -30,7 +30,7 @@ const MainHeader = () => {
                         </Link>
 
                         <Link
-                            to='/homepage/add-rental'
+                            to='/create-rental'
                         >
                             Add Rental
                         </Link>

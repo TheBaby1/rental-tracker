@@ -25,8 +25,32 @@ const useRent = () => {
         }
     }
 
+    const createRental = async (rentalData) => {
+        setLoading(true);
+        setError(false);
+
+        try {
+            const response = await fetch('http://localhost:3001/create-rent', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(rentalData)
+            });
+
+            if (!response.ok) {
+                console.log('Error');
+            }
+
+            return rentalData;
+        } catch (error) {
+            setError(error);
+        } finally {
+            setLoading(false);
+        }
+    }
+
     return {
         getRentals,
+        createRental,
         loading,
         error
     };
