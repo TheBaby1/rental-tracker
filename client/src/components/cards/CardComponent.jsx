@@ -1,8 +1,10 @@
 import DeleteButton from "../buttons/DeleteButton";
 import UpdateButton from "../buttons/UpdateButton";
+import SendEmailButton from "../buttons/SendEmailButton";
 import UpdateRentalModal from "../modals/UpdateRentModal";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import emailjs from '@emailjs/browser'
 
 const CardComponent = ({ rentals = [], deleteRentalById, updateRentalById }) => {
 
@@ -37,6 +39,25 @@ const CardComponent = ({ rentals = [], deleteRentalById, updateRentalById }) => 
     const handleUpdate = () => {
 
     }
+
+    const sendEmail = (rental) => {
+        const SERVICE_ID = 'service_yw5l0wj';
+        const TEMPLATE_ID = 'template_fhktmsh';
+        const PUBLIC_KEY = '2kASudV4Wmu3OlazL';
+
+        const templateParams = {
+            to_email: rental.email, 
+            tenant_name: rental.tenantName,
+            rental_id: rental.readableId,
+        };
+
+        emailjs.send(SERVICE_ID, TEMPLATE_ID, templateParams, PUBLIC_KEY)
+            .then((response) => {
+                alert('Email sent successfully!');
+            }, (error) => {
+                alert('Failed to send email: ' + error.text);
+            });
+    };
 
     return (
         <>
@@ -97,15 +118,19 @@ const CardComponent = ({ rentals = [], deleteRentalById, updateRentalById }) => 
                             </div>
                         </div>
 
-                        <div className="flex justify-center gap-[40px] mt-6">
+                        <div className="flex justify-center gap-[30px] mt-6">
                             <DeleteButton
                                 onClick={() => handleDelete(rental._id)}
                             />
-                            <UpdateButton onClick={() => {
-                                setSelectedRental(rental);
-                                setIsModalOpen(true);
-                            }} />
+                            <UpdateButton
+                                onClick={() => {
+                                    setSelectedRental(rental);
+                                    setIsModalOpen(true);
+                                }} />
 
+                            <SendEmailButton
+                                onClick={() => sendEmail(rental)}
+                            />
                         </div>
                     </div>
                 );

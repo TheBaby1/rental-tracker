@@ -7,6 +7,7 @@ const CreateRentalPageContent = () => {
 
     const [formData, setFormData] = useState({
         tenantName: '',
+        email: '',
         rentType: '',
         location: '',
         rentalPrice: '',
@@ -40,6 +41,7 @@ const CreateRentalPageContent = () => {
 
             setFormData({
                 tenantName: '',
+                email: '',
                 rentType: '',
                 location: '',
                 rentalPrice: '',
@@ -74,6 +76,21 @@ const CreateRentalPageContent = () => {
                                 name="tenantName"
                                 placeholder="Enter tenant name"
                                 value={formData.tenantName}
+                                onChange={handleChange}
+                                required
+                                className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
+                            />
+                        </div>
+
+                        <div>
+                            <label className="block text-sm font-medium text-gray-700 mb-2">
+                                Email
+                            </label>
+                            <input
+                                type="email"
+                                name="email"
+                                placeholder="Enter email"
+                                value={formData.email}
                                 onChange={handleChange}
                                 required
                                 className="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 outline-none transition-colors"
