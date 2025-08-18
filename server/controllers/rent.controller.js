@@ -18,7 +18,7 @@ export const createRent = async (req, res) => {
         const readableId = await generateReadableId();
 
         const rentWithId = {
-            ...rent,
+            ...rent,             
             readableId: readableId
         };
 
