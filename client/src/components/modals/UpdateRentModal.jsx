@@ -4,6 +4,7 @@ import UpdateButton from '../buttons/UpdateButton';
 const UpdateRentalModal = ({ isOpen, onClose, rental, updateRentalById }) => {
     const [formData, setFormData] = useState({
         tenantName: "",
+        email: "",
         rentType: "",
         location: "",
         rentalPrice: "",
@@ -16,6 +17,7 @@ const UpdateRentalModal = ({ isOpen, onClose, rental, updateRentalById }) => {
         if (rental) {
             setFormData({
                 tenantName: rental.tenantName || "",
+                email: rental.email || "",
                 rentType: rental.rentType || "",
                 location: rental.location || "",
                 rentalPrice: rental.rentalPrice || "",

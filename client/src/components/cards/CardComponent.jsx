@@ -36,17 +36,13 @@ const CardComponent = ({ rentals = [], deleteRentalById, updateRentalById }) => 
         }
     }
 
-    const handleUpdate = () => {
-
-    }
-
     const sendEmail = (rental) => {
-        const SERVICE_ID = 'service_yw5l0wj';
-        const TEMPLATE_ID = 'template_fhktmsh';
-        const PUBLIC_KEY = '2kASudV4Wmu3OlazL';
+        const SERVICE_ID = import.meta.env.VITE_SERVICE_ID;
+        const TEMPLATE_ID = import.meta.env.VITE_TEMPLATE_ID;
+        const PUBLIC_KEY = import.meta.env.VITE_PUBLIC_KEY;
 
         const templateParams = {
-            to_email: rental.email, 
+            to_email: rental.email,
             tenant_name: rental.tenantName,
             rental_id: rental.readableId,
         };
