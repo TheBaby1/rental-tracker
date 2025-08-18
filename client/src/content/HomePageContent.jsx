@@ -2,26 +2,14 @@ import useRent from "../hooks/useRent";
 import { useState, useEffect } from 'react';
 import CardComponent from "../components/cards/CardComponent";
 
-const HomePageContent = ({ children }) => {
+const HomePageContent = () => {
 
-    const {
-        getRentals,
-        loading,
-        error
-    } = useRent();
-
-    const [rentals, setRentals] = useState([]);
-
-    const fetchRentals = async () => {
-        const rentals = await getRentals();
-        if (rentals) {
-            setRentals(rentals);
-        }
-    }
+    const { rentals, getRentals, loading, error, deleteRentalById, updateRentalById } = useRent();
 
     useEffect(() => {
-        fetchRentals();
+        getRentals();
     }, []);
+
 
     return (
         <>
@@ -29,6 +17,8 @@ const HomePageContent = ({ children }) => {
                 <div className="flex flex-wrap gap-x-4 gap-y-6 justify-start">
                     <CardComponent
                         rentals={rentals}
+                        deleteRentalById={deleteRentalById}
+                        updateRentalById={updateRentalById}
                     />
                 </div>
             </div>

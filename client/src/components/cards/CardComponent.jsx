@@ -1,15 +1,10 @@
-import useRent from "../../hooks/useRent";
 import DeleteButton from "../buttons/DeleteButton";
 import UpdateButton from "../buttons/UpdateButton";
 import UpdateRentalModal from "../modals/UpdateRentModal";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 
-const CardComponent = ({ rentals = [] }) => {
-
-    const {
-        deleteRentalById
-    } = useRent();
+const CardComponent = ({ rentals = [], deleteRentalById, updateRentalById }) => {
 
     const navigate = useNavigate();
 
@@ -36,7 +31,6 @@ const CardComponent = ({ rentals = [] }) => {
             } catch (error) {
                 console.error('Failed to delete rental:', error);
             }
-            navigate('/homepage/view-rentals');
         }
     }
 
@@ -122,6 +116,7 @@ const CardComponent = ({ rentals = [] }) => {
                     isOpen={isModalOpen}
                     onClose={() => setIsModalOpen(false)}
                     rental={selectedRental}
+                    updateRentalById={updateRentalById}
                 />
             )}
         </>
