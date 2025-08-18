@@ -4,7 +4,7 @@ const CardComponent = ({ rentals = [] }) => {
         <>
             {rentals.map((rental, index) => {
                 return (
-                    <div key={rental.id || index} className="h-[300px] w-[350px] bg-[#7AB2D3] rounded-lg px-3 py-4">
+                    <div key={rental.id || index} className="h-[300px] min-w-[320px] bg-[#7AB2D3] shadow-md rounded-lg px-3 py-4">
                         {/* Details Section */}
                         <div>
                             <h2>Rental ID: {rental._id}</h2>
