@@ -2,7 +2,7 @@ const MainHeader = () => {
 
     return (
         <>
-            <div className="max-w-screen h-[80px] bg-[#7AB2D3] flex flex-col">
+            <div className="max-w-screen h-[80px] bg-[#B9E5E8] flex flex-col">
                 <div className="flex items-center justify-between px-2 h-full">
                     {/* Left Sections */}
                     <div className="flex items-center gap-2">

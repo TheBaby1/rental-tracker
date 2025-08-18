@@ -7,9 +7,7 @@ const HomePage = () => {
     return (
         <>
             <MainHeader/>
-            <HomePageContent>
-                <CardComponent/>
-            </HomePageContent>
+            <HomePageContent/>
         </>
     );
 }
