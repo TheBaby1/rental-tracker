@@ -10,10 +10,10 @@ const MainHeader = () => {
                     {/* Left Section */}
                     <div className="flex items-center gap-2">
                         <div className="h-[50px] w-[50px] bg-gray-300 rounded-lg">
-                            <img 
-                            src={logo} 
-                            alt="MyRentals Logo"
-                            className="object-contain rounded-lg"
+                            <img
+                                src={logo}
+                                alt="MyRentals Logo"
+                                className="object-contain rounded-lg"
                             ></img>
                         </div>
                         <h1 className="font-bold text-[20px]">
@@ -25,12 +25,13 @@ const MainHeader = () => {
                     <div className="flex items-center gap-x-6">
                         <Link
                             to='/homepage/view-rentals'
+                            className="text-gray-600 hover:text-blue-600 transition-colors duration-200"
                         >
                             Rentals
                         </Link>
-
                         <Link
                             to='/create-rental'
+                            className="text-gray-600 hover:text-green-600 transition-colors duration-200 ml-6"
                         >
                             Add Rental
                         </Link>

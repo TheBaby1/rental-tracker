@@ -1,65 +1,68 @@
-import useRent from "../hooks/useRent";
-import { useState, useEffect } from 'react';
-import SubmitButton from "../components/buttons/SubmitButton";
-import { useNavigate } from "react-router-dom";
+import React from 'react';
+import { useState, useEffect } from "react";
+import UpdateButton from '../buttons/UpdateButton';
+import useRent from '../../hooks/useRent';
 
-const CreateRentalPageContent = () => {
-
-    const [formData, setFormData] = useState({
-        tenantName: '',
-        rentType: '',
-        location: '',
-        rentalPrice: '',
-        status: 'active',
-        startDate: '',
-        endDate: ''
-    });
-
-    const navigate = useNavigate();
+const UpdateRentalModal = ({ isOpen, onClose, rental }) => {
 
     const {
-        createRental
+        updateRentalById
     } = useRent();
 
+    const [formData, setFormData] = useState({
+        tenantName: "",
+        rentType: "",
+        location: "",
+        rentalPrice: "",
+        startDate: "",
+        endDate: "",
+        status: "active",
+    });
+
+    useEffect(() => {
+        if (rental) {
+            setFormData({
+                tenantName: rental.tenantName || "",
+                rentType: rental.rentType || "",
+                location: rental.location || "",
+                rentalPrice: rental.rentalPrice || "",
+                startDate: rental.startDate ? rental.startDate.split("T")[0] : "",
+                endDate: rental.endDate ? rental.endDate.split("T")[0] : "",
+                status: rental.status || "active",
+            });
+        }
+    }, [rental]);
+
     const handleChange = (e) => {
-        setFormData({ ...formData, [e.target.name]: e.target.value });
-    }
+        const { name, value } = e.target;
+        setFormData((prev) => ({ ...prev, [name]: value }));
+    };
 
     const handleSubmit = async (e) => {
-        if (window.confirm('Are you sure you want to create this rental?')) {
-            e.preventDefault();
-
-            try {
-                const result = await createRental({
-                    ...formData,
-                    rentalPrice: parseFloat(formData.rentalPrice) || 0
-                });
-            } catch (error) {
-                console.error('Failed to create rental.');
+        e.preventDefault();
+        try {
+            if (!rental?._id) {
+                console.error("No rental ID provided");
+                return;
             }
-
-            setFormData({
-                tenantName: '',
-                rentType: '',
-                location: '',
-                rentalPrice: '',
-                status: 'active',
-                startDate: '',
-                endDate: ''
-            })
-
-            navigate('/homepage/view-rentals');
+            await updateRentalById(rental._id, formData);
+            alert("Rental updated successfully!");
+            onClose();
+        } catch (err) {
+            console.error("Update failed:", err);
         }
-    }
+    };
+
+    if (!isOpen) return null;
 
     return (
-        <div className="min-h-screen bg-[#DFF2EB] flex justify-center px-4 py-8">
-            <div className="w-full max-w-md">
-                <div className="bg-white shadow-lg rounded-lg overflow-hidden">
+        <div className="fixed inset-0 flex items-center justify-center z-50">
+            <div className="bg-white rounded-lg px-[50px] py-[50px] w-full min-h-[600px] max-w-md mx-4">
+                <div className="bg-white max-h-[600px] shadow-lg rounded-lg overflow-auto">
                     {/* Header */}
                     <div className="bg-gradient-to-r from-blue-600 to-blue-700 px-6 py-4">
                         <h1 className="text-xl font-semibold text-white text-center">
-                            Create New Rental
+                            Update Rental
                         </h1>
                     </div>
 
@@ -179,18 +182,19 @@ const CreateRentalPageContent = () => {
                         </div>
 
                         <div className="pt-4">
-                            <SubmitButton
+                            <UpdateButton
                                 type="submit"
                                 className="w-full bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors duration-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
                             >
-                                Create Rental
-                            </SubmitButton>
+                                Update Rental
+                            </UpdateButton>
                         </div>
                     </form>
                 </div>
+
             </div>
         </div>
     );
-}
+};
 
-export default CreateRentalPageContent;
+export default UpdateRentalModal;
